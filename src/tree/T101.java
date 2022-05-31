@@ -20,7 +20,7 @@ public class T101 {
                 return false;
             }
             for(int j = 0; j < left.size(); j++) {
-                if(left.get(j) != right.get(j)) {
+                if(!left.get(j).equals(right.get(j))) {
                     return false;
                 }
             }
@@ -62,6 +62,7 @@ public class T101 {
             }
             lists.add(items);
         }
+        Collections.reverse(lists);
         return lists;
     }
 
