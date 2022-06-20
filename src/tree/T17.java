@@ -24,7 +24,7 @@ public class T17 {
             return;
         }
         int size = input[startIndex].length()+1;
-        
+
     }
     public static void main(String[] args) {
 
