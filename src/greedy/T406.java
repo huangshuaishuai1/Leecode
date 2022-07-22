@@ -1,9 +1,7 @@
 package greedy;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class T406 {
 
@@ -14,35 +12,15 @@ public class T406 {
                 if (o1[0]==o2[0]) {
                     return o1[1]-o2[1];
                 }
-                return o1[0]-o2[0];
+                return o2[0]-o1[0];
 
             }
         });
-        int[][] ret = new int[people.length][2];
-        for (int i = 0; i < ret.length; i++) {
-            Arrays.fill(ret[i],-1);
-        }
+        LinkedList<int[]> que = new LinkedList<>();
         for (int i = 0; i < people.length; i++) {
-            int num = people[i][0];
-            int pos = people[i][1];
-            // 判断pos前面被占了几个位置
-            int count = 0;
-            for (int j = 0; j <= pos; j++) {
-                if (ret[j][1] != -1 && ret[j][0] < num) {
-                    count++;
-                }
-            }
-            for (int j = pos; j < people.length; j++) {
-                if (ret[j][1] == -1) {
-                    if (count == 0) {
-                        ret[j] = people[i];
-                        break;
-                    }else {
-                        count--;
-                    }
-                }
-            }
+            que.add(people[i][1],people[i]);
         }
+        int[][] ret = que.toArray(new int[people.length][]);
         return ret;
     }
 
