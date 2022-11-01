@@ -44,7 +44,7 @@ public class T28_KMP {
 
     public static void main(String[] args) {
         T28_KMP t28_kmp = new T28_KMP();
-        int i = t28_kmp.strStr("hello", "c");
+        int i = t28_kmp.strStr("mississippi", "issip");
         System.out.println(i);
     }
 }
