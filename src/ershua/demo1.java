@@ -1,6 +1,5 @@
 package ershua;
 
-import sun.awt.windows.WPrinterJob;
 
 public class demo1 {
     // 先序
