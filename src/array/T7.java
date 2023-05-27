@@ -21,12 +21,13 @@ public class T7 {
         String ansStr = new String(charArray);
         Long ans = Long.valueOf(ansStr);
         if (ans > Integer.MAX_VALUE) {
-
+            return 0;
         }
+
         if (x < 0) {
-            return ans * (-1);
+            return (int) (long) ans * -1;
         }else {
-            return ans;
+            return (int) (long) ans;
         }
     }
 
