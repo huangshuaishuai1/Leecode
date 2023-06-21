@@ -6,16 +6,27 @@ import java.util.HashSet;
 
 public class T377 {
     public int combinationSum4(int[] nums, int target) {
-        int[] dp = new int[target + 1];
+//        int[][] dp = new int[nums.length+1][target+1];
+        Arrays.sort(nums);
+//        dp[0][0] = 1;
+//        for (int i = 1; i <= nums.length; i++) {  // 记得i-1取num
+//            for (int j = 1; j <= target; j++) {
+//
+//            }
+//        }
+
+        int[] dp = new int[target+1];
         dp[0] = 1;
-        for (int i = 0; i <= target; i++) {
+        for (int i = 1; i <= target; i++) {
             for (int j = 0; j < nums.length; j++) {
-                if (i >= nums[j]) {
-                    dp[i] += dp[i - nums[j]];
+                if (nums[j] > i) {
+                    break;
+                }else {
+                    dp[i] += dp[i-nums[j]];
                 }
             }
         }
-        return dp[target];
+        return dp[dp.length-1];
     }
 
 
