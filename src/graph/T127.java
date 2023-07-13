@@ -41,7 +41,8 @@ public class T127 {
                             return ans;
                         }
                         queue.add(word);
-                        used[j] = 1;
+
+
                     }
                 }
             }
