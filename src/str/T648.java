@@ -16,6 +16,7 @@ public class T648 {
         System.out.println(t648.replaceWords(list, "the cattle was rattled by the battery"));
     }
 
+
     public String replaceWords(List<String> dictionary, String sentence) {
         String[] words = sentence.split(" ");
         List<String> list = dictionary.stream().sorted(new Comparator<String>() {
