@@ -1,14 +1,15 @@
 package douyin;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class T {
 
     public static void main(String[] args) {
         T t = new T();
-        int[][] arr = new int[][]{{2,2,2,2,2,2,2},{2,0,0,0,0,0,2},{2,0,2,0,2,0,2},{2,0,0,2,0,2,2},{2,2,0,2,0,2,2},{2,0,0,0,0,0,0,2},{2,2,2,2,2,2,0,2}};
-        int[] start = new int[]{1,1};
-        System.out.println(t.nearestExit(arr, start));
+        int[] ints = t.twoSum(new int[]{3,2,4}, 6);
+        System.out.println(ints);
     }
 
     public int nearestExit(int[][] maze, int[] entrance) {
@@ -47,5 +48,37 @@ public class T {
 
         return ans;
     }
+
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++) {
+            ArrayList<Integer> list = map.getOrDefault(nums[i],new ArrayList<Integer>());
+            list.add(i);
+            map.put(nums[i],list);
+        }
+
+        int[] ans = new int[2];
+        for(int i = 0; i < nums.length; i++) {
+            if(map.containsKey(target-nums[i])) {
+                if (nums[i]* 2 == target && map.get(nums[i]).size() > 1) {
+                    ArrayList<Integer> list = map.get(nums[i]);
+                    ans[1] = list.get(0);
+                    ans[0] = list.get(1);
+                    return ans;
+                }else if (nums[i]* 2 != target){
+                    ArrayList<Integer> list1 = map.get(nums[i]);
+                    ArrayList<Integer> list2 = map.get(target-nums[i]);
+
+                    ans[1] = list1.get(0);
+                    ans[0] = list2.get(0);
+                    return ans;
+                }
+
+            }
+        }
+        return ans;
+    }
+
 
 }

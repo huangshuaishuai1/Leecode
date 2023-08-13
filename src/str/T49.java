@@ -1,11 +1,12 @@
 package str;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class T49 {
+    public static void main(String[] args) {
+        T49 t49 = new T49();
+        System.out.println(t49.groupAnagrams(new String[]{"", ""}));
+    }
 
     public List<List<String>> groupAnagrams(String[] strs) {
 
@@ -13,17 +14,25 @@ public class T49 {
         ArrayList<List<String>> strList = new ArrayList<>();
         ArrayList<List<String>> ans = new ArrayList<>();
         int[] parent = new int[strs.length];
+        HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < parent.length; i++) {
             parent[i] = i;
             ArrayList<String> strings = new ArrayList<>();
             strings.add(strs[i]);
             strList.add(strings);
+            if (strs[i] == "") {
+               ans.add(strings);
+               set.add(i);
+            }
         }
         for (int i = 0; i < strs.length; i++) {
+            if (set.contains(i)) {
+                continue;
+            }
             String str = strs[i];
             HashMap<Integer, Integer> map = maps.getOrDefault(i, new HashMap<>());
             for (int j = 0; j < str.length(); j++) {
-                int idx = str.charAt(i) - 'a';
+                int idx = str.charAt(j) - 'a';
                 Integer count = map.getOrDefault(idx, 0);
                 map.put(idx,count+1);
             }
@@ -32,23 +41,35 @@ public class T49 {
 
 
         for (int i = 0; i < strs.length; i++) {
+            if (set.contains(i)) {
+                continue;
+            }
             for (int j = i+1; j < strs.length; j++) {
+                if (set.contains(j)) {
+                    continue;
+                }
                 if (strs[i].length() != strs[j].length()) {
                     continue;
                 }
                 HashMap<Integer, Integer> iMap = maps.get(i);
                 HashMap<Integer, Integer> jMap = maps.get(j);
                 Set<Integer> keySet = iMap.keySet();
+                int tag = 0;
                 for (Integer integer : keySet) {
                     if (iMap.get(integer) != jMap.get(integer)) {
-                        continue;
+                        tag = 1;
+                        break;
                     }
                 }
-                // 合并
-                union(i,j,strList,parent);
+                if (tag == 0) {
+                    union(i,j,strList,parent);
+                }
             }
         }
         for (int i = 0; i < parent.length; i++) {
+            if (set.contains(i)) {
+                continue;
+            }
             if (parent[i] == i) {
                 List<String> strings = strList.get(i);
                 ans.add(strings);
