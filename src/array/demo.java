@@ -12,10 +12,16 @@ import java.util.Scanner;
 
 public class demo {
     public static void main(String[] args) {
-        Integer chargeTime = getChargeTime(new Date());
+        String msg = "1";
+        int i = 0;
+        while (true) {
 
-        System.out.println(chargeTime);
-
+            if (i == 2) {
+                break;
+            }
+            i = i++;
+        }
+        System.out.println(msg+i);
     }
 
 
