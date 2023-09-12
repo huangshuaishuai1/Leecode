@@ -12,7 +12,10 @@ public class TTT {
         for (int i = 0; i <n; i++) {
             work[i] = scanner.nextInt();
         }
-
+        if (n <= 2) {
+            System.out.println(Math.max(work[0],work[1]));
+            return;
+        }
         int[] dp = new int[n+1];
         dp[0] = 0;
         dp[1] = work[0];

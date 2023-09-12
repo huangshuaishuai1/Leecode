@@ -24,13 +24,22 @@ public class TT {
         int right = n-1;
         int ans = 0;
         int count = 0;
-        while (right > 0 && happy[right] > 0) {
+        while (right >= 0 && happy[right] > 0) {
             ans+=happy[right];
             count+=1;
             right--;
         }
         ans += (count/3)*k;
         count%=3;
+        while (right >= 2 && happy[right] > -k) {
+            if (happy[right] + happy[right-1] + happy[right-2] > -k) {
+                ans += happy[right] + happy[right-1] + happy[right-2] + k;
+            }else {
+                break;
+            }
+            right-=3;
+        }
+
         if (count == 2 && right >= 0) {
             if (happy[right] > -k) {
                 ans += happy[right] + k;
@@ -41,14 +50,6 @@ public class TT {
                 ans += happy[right] + happy[right-1] + k;
             }
             right-=2;
-        }
-        while (right >= 2 && happy[right] > -k) {
-            if (happy[right] + happy[right-1] + happy[right-2] > -k) {
-                ans += happy[right] + happy[right-1] + happy[right-2] + k;
-            }else {
-                break;
-            }
-            right-=3;
         }
         System.out.println(ans);
     }
