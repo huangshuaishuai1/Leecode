@@ -3,7 +3,7 @@ package base;
 public class KuaiPai {
 
     public static void main(String[] args) {
-        int[] numbers = {1, 5, 7, 2, 4, 3, 6};
+        int[] numbers = {1, 6, 7, 2, 4, 3, 5};
         quick(numbers,0,numbers.length-1);
         System.out.println(111);
     }

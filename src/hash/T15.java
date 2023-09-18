@@ -4,56 +4,59 @@ import java.util.*;
 
 public class T15 {
     public List<List<Integer>> threeSum(int[] nums) {
-//        if (nums.length < 3) {
-//            return null;
-//        }
-        HashMap<Integer, Integer> numsFrequency = new HashMap<>();
-//      得到所有num的词频
-        for (int number :
-                nums) {
-            if (numsFrequency.containsKey(number)) {
-                numsFrequency.put(number, numsFrequency.get(number) + 1);
-            } else {
-                numsFrequency.put(number, 1);
-            }
+        Arrays.sort(nums);
+        ArrayList<List<Integer>> list = new ArrayList<>();
+        if(nums[0] > 0 || nums[nums.length-1] < 0) {
+            return list;
         }
 
-        List<List<Integer>> triplets = new ArrayList<>();
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                int rest = -nums[i] - nums[j];
-                if (numsFrequency.containsKey(rest)) {
-                    List<Integer> triplet = new ArrayList<>();
-                    triplet.add(nums[i]);
-                    triplet.add(nums[j]);
-                    if (nums[i] == rest && nums[j] == rest) {
-                        if (numsFrequency.get(rest) > 2) {
-                            triplet.add(rest);
-                            Collections.sort(triplet);
-                            if (! triplets.contains(triplet)){
-                                triplets.add(triplet);
-                            }
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            int count = map.getOrDefault(nums[i],0);
+            count ++;
+            map.put(nums[i],count);
+        }
 
-                        }
-                    } else if (nums[i] == rest || nums[j] == rest) {
-                        if (numsFrequency.get(rest) > 1) {
-                            triplet.add(rest);
-                            Collections.sort(triplet);
-                            if (! triplets.contains(triplet)){
-                                triplets.add(triplet);
-                            }
-                        }
-                    } else {
-                        triplet.add(rest);
-                        Collections.sort(triplet);
-                        if (! triplets.contains(triplet)){
-                            triplets.add(triplet);
-                        }
+        int l = 0;
+        int r = nums.length-1;
+
+        while(l < r) {
+            int gap = 0-nums[l] - nums[r];
+            if(gap == nums[l] || gap == nums[r]) {
+                if(gap == 0 && map.get(0) >=3) {
+                    ArrayList<Integer> tmp = new ArrayList<>();
+                    tmp.add(0);
+                    tmp.add(0);
+                    tmp.add(0);
+                    list.add(tmp);
+                } else {
+                    if(map.get(gap) >= 2) {
+                        ArrayList<Integer> tmp = new ArrayList<>();
+                        tmp.add(nums[l]);
+                        tmp.add(nums[r]);
+                        tmp.add(gap);
+                        list.add(tmp);
                     }
                 }
+            } else {
+                if(map.containsKey(gap)) {
+                    ArrayList<Integer> tmp = new ArrayList<>();
+                    tmp.add(nums[l]);
+                    tmp.add(nums[r]);
+                    tmp.add(gap);
+                    list.add(tmp);
+                }
+            }
+            if(gap > 0) {
+                l += map.get(nums[l]);
+            }else if(gap < 0) {
+                r -= map.get(nums[r]);
+            }else {
+                r -= map.get(nums[r]);
+                l += map.get(nums[l]);
             }
         }
-        return triplets;
+        return list;
     }
 
     public static void main(String[] args) {
