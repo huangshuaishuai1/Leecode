@@ -9,6 +9,7 @@ public class TTT3{
     static long MOD = 1000000007;
     public int cntOfMethod(String t) {
         long[] dp = new long[t.length()+1];
+        String a = "aaa";
         dp[0] = 0;
         dp[1] = 1;
         dp[2] = 1;
