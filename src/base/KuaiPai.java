@@ -7,7 +7,6 @@ public class KuaiPai {
         quick(numbers,0,numbers.length-1);
         System.out.println(111);
     }
-
     private static void quick(int[] numbers, int l, int h) {
         if (l >= h) {
             return;
@@ -16,7 +15,6 @@ public class KuaiPai {
         partition(numbers,l,next-1);
         partition(numbers,next+1,h);
     }
-
     private static int partition(int[] numbers, int l, int h) {
         int i = l;
         for (int j = l; j < h; j++) {
