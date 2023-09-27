@@ -3,6 +3,7 @@ package sxf;
 import java.util.Scanner;
 
 public class T2 {
+    //模拟正则表达式
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,6 +16,7 @@ public class T2 {
         if (mode.isEmpty()) {
             return str.isEmpty();
         }
+        // 第一个字符是否匹配
         boolean firsetMatch = (!str.isEmpty() && (str.charAt(0) == mode.charAt(0)|| mode.charAt(0)=='.'));
 
         if (mode.length() >= 2 && mode.charAt(1) == '*') {

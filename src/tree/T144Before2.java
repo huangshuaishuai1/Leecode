@@ -13,16 +13,15 @@ public class T144Before2 {
         ArrayList<Integer> integers = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
-        while (stack.size() != 0) {
-            integers.add(stack.peek().val);
+        while (!stack.empty()) {
             TreeNode pop = stack.pop();
+            integers.add(pop.val);
             if (pop.right!=null) {
                 stack.push(pop.right);
             }
-            if (pop.left != null) {
+            if (pop.left!=null) {
                 stack.push(pop.left);
             }
-
         }
         return integers;
     }

@@ -8,25 +8,23 @@ import java.util.TreeMap;
 public class T94Mid2 {
 
     public List<Integer> inorderTraversal(TreeNode root) {
-        ArrayList<Integer> integers = new ArrayList<>();
-        if (root==null) {
-            return  integers;
-        }
+        ArrayList<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (stack.size() != 0) {
-            while (stack.peek().left != null) {
-                TreeNode left = stack.peek().left;
-                stack.peek().left = null;
-                stack.push(left);
-            }
-            TreeNode pop = stack.pop();
-            integers.add(pop.val);
-            if (pop.right != null) {
-                stack.push(pop.right);
+        if(root == null) {
+            return null;
+        }
+        TreeNode cur = root;
+        while(cur!=null || stack.size() != 0) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                TreeNode pop = stack.pop();
+                list.add(pop.val);
+                cur = pop.right;
             }
         }
-        return  integers;
+        return list;
     }
     public static void main(String[] args) {
         TreeNode root = new TreeNode(5);

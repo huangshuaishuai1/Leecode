@@ -12,8 +12,8 @@ public class KuaiPai {
             return;
         }
         int next = partition(numbers,l,h);
-        partition(numbers,l,next-1);
-        partition(numbers,next+1,h);
+        quick(numbers,l,next-1);
+        quick(numbers,next+1,h);
     }
     private static int partition(int[] numbers, int l, int h) {
         int i = l;
